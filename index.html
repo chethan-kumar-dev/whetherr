@@ -1,0 +1,123 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@100&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        *{font-family: 'Fira Sans Extra Condensed', sans-serif;
+font-family: 'Patrick Hand', cursive;font-size: 20px;}
+    </style>
+</head>
+<body style="background-color: rgb(56, 56, 78);">
+<div id="man" style="position: sticky;top: 0px;left: 10px;padding: 20px;background-color: rgb(56, 56, 78);border: 2px solid grey;height: 270px;margin-top: -50px;">
+    <input id="name" type="date" style="width: 200px;">
+    <select style="padding: 1px; width: 130px;" id="opt" onchange="func()"  >
+       <optgroup  label="mood">
+        <option selected  value="s">none</option>
+
+        <option  value="sad">Sad</option>
+        <option value="happy">Happy</option>
+        <option value="very">Very depressed</option>
+        <option value="loving">Loving</option>
+        <option value="angry">Angry</option>
+       </optgroup>
+    </select>
+    <br>
+    <br>
+    <textarea maxlength="90" id="value" cols="33" rows="4" style="border-radius: 20px;padding: 10px;box-sizing: border-box;border: 3px solid grey;" ></textarea><br><br>
+    <button onclick="process()" style="border-radius: 10px;padding: 5px;background-color: orange;">Insert</button>
+    <br>
+    <hr>
+</div>
+<hr>
+<br>
+<br>
+    <div id="container" style="width: 400px;height: 400px;"></div>
+    <script>
+        var dt=new Date();
+        dt.getHours();
+        dt.getMinutes();
+        dt.getSeconds();
+       var nam= document.getElementById("name");
+       var valuee= document.getElementById("value");
+     var options=document.getElementById("opt");
+        var cont=document.getElementById("container");
+        var choose;
+        var main=document.getElementById("man");
+        window.onscroll=function()
+        {
+                main.style.position="sticky";
+        }
+        function func()
+        {
+            if(options.value=="sad")
+          {
+              choose="&#128532";
+          }
+          else if(options.value=="very")
+          {
+              choose="&#128547";
+          }
+          else if(options.value=="happy")
+          {
+               choose="&#128514"
+          } 
+          else if(options.value=="loving")
+          {
+                choose="&#128525";
+          }
+          else if(options.value=="angry")
+          {
+                choose="&#128520";
+          }
+          else{
+              choose="none";
+          }
+        }
+       function process()
+       {
+           var a1,a2;
+           if(nam.value=="" && valuee.innerHTML=="")
+           {
+               alert("please enter details properly")
+               
+           }
+           else
+           {
+            a1=nam.value+choose+"    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     "+"&#9203"+" "+dt.toLocaleTimeString();
+            a2=valuee.value;
+          window.localStorage.setItem(a1,a2);
+          window.location.reload();
+           }
+           
+       }
+       window.onload=function()
+       {
+           for(var i=0;i<localStorage.length;i++)
+           {
+               var data1=localStorage.key(i);
+               var data2=localStorage.getItem(data1);
+               var newdiv=document.createElement("div");
+            newdiv.style.width="360px";
+            newdiv.style.height="130px";
+            newdiv.style.border="3px solid grey";
+            newdiv.style.margin="10px";
+            newdiv.style.overflow="auto";
+            newdiv.style.padding="10px";
+            newdiv.style.borderRadius="20px";
+            newdiv.style.backgroundColor="white";
+            newdiv.style.boxSizing="border-box";
+            newdiv.style.boxShadow="1px 1px 6px white"
+            newdiv.innerHTML=data1+"<br>"+data2;
+            cont.appendChild(newdiv);
+           }
+           
+       }
+      //loving 128525
+      //sad 128532
+      //very 128547
+      //happy 128514
+    </script>
+</body>
+</html>
